@@ -24,13 +24,17 @@ def create_matrix(data: list) -> list[list]:
 
 
 def draw_columns(data: list, char: str=' Ii') -> None:
-    """The function takes a matrix representing a column graph as input and displays it on the screen.
+    """The function takes a matrix representing a column graph as input and displays it on the screen. Columns are drawn using 3 characters, of which at least one is reserved for a space. For example, ' Ii' is the default value.
+
     Args:
         data (list): matrix data contains list of rows with 1 (column) or 0 (empty space)
         char (str): the character used to represent the graph, must have lenght of 3
     Returns:
-        No returns, print results on the screen."""
+        None: print results directly on the screen."""
     
+    if not check_char(char):
+        char = ' Ii'
+
     string_all_rows = []
 
     for row in data:
@@ -48,9 +52,29 @@ def draw_columns(data: list, char: str=' Ii') -> None:
         print(row_to_print)
 
 
+def check_char(char: str) -> bool:
+    """The function checks whether the given string meets the conditions for proper rendering. 
+    The conditions are:
+     - lenght is 3 characters
+     - first char is space
+     - at least one character is not space    
+
+    Args:
+        char (str): the character used to represent the graph
+
+    Returns:
+        bool: Returns true if the conditions are met.
+    """
+
+    if len(char) == 3 and char.startswith(' ') and not char.isspace():
+        return True
+
+
+
 def main():
-    matrix = create_matrix([4, 4, 2, 8, 4, 2, 1])
-    draw_columns(matrix, 'd')
+    print('')
+    matrix = create_matrix([4, 4, 2, 8, 4, 2, 1]) # testing line
+    draw_columns(matrix, ' ||') # testing line
 
 if __name__ == '__main__':
     main()
