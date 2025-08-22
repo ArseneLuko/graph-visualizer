@@ -23,7 +23,7 @@ def create_matrix(data: list) -> list[list]:
     return all_rows
 
 
-def draw_columns(data: list, char: str=' Ii') -> None:
+def draw_columns(data: list[list], char: str = ' Ii') -> None:
     """The function takes a matrix representing a column graph as input and displays it on the screen. Columns are drawn using 3 characters, of which at least one is reserved for a space. For example, ' Ii' is the default value.
 
     Args:
@@ -47,9 +47,28 @@ def draw_columns(data: list, char: str=' Ii') -> None:
                 string_row += char
                 
         string_all_rows.append(string_row)
+    string_all_rows = add_legend(string_all_rows)
 
     for row_to_print in string_all_rows:
         print(row_to_print)
+
+
+def add_legend(string_data: list[str]):
+    row_number = [n + 1 for n in range(len(string_data))]
+    for number, row in enumerate(string_data):
+        string_data[number] = str(row_number.pop()).rjust(2) + '.|' + row
+
+    # add 2 the lowest rows
+
+    steps = (len(string_data[0]) - 4) // 3
+    _1st_lowest_row = f'   -{3 * steps * '-'}'
+    _2nd_lowest_row = f'    '
+    for num in range(1, steps + 1):
+        _2nd_lowest_row += str(num).rjust(3)
+    string_data.append(_1st_lowest_row)
+    string_data.append(_2nd_lowest_row)
+
+    return string_data
 
 
 def check_char(char: str) -> bool:
@@ -70,11 +89,10 @@ def check_char(char: str) -> bool:
         return True
 
 
-
 def main():
     print('')
-    matrix = create_matrix([4, 4, 2, 8, 4, 2, 1]) # testing line
-    draw_columns(matrix, ' ||') # testing line
+    matrix = create_matrix([4, 24, 2, 11, 2, 1, 1, 8, 22, 8, 4, 2, 1]) # testing line
+    draw_columns(matrix, '  X') # testing line
 
 if __name__ == '__main__':
     main()
