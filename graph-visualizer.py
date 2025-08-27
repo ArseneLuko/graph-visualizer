@@ -62,7 +62,7 @@ def add_legend(string_data: list[str]):
 
     steps = (len(string_data[0]) - 4) // 3
     _1st_lowest_row = f'   -{3 * steps * '-'}'
-    _2nd_lowest_row = f'    '
+    _2nd_lowest_row = '    '
     for num in range(1, steps + 1):
         _2nd_lowest_row += str(num).rjust(3)
     string_data.append(_1st_lowest_row)
