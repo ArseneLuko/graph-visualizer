@@ -8,13 +8,14 @@ class GraphVisualizer:
 
     def __init__(self, data: list, char: str = None):
         self.data = data
-        self.matrix = self.__create_matrix__()
+        self.matrix = self.__create_matrix()
         if char is None:
             self.char = GraphVisualizer.char
         else:
             self.char = char
 
-    def __create_matrix__(self):
+
+    def __create_matrix(self):
         """Create a matrix presenting columns with 1 (column) or 0 (empty) based on numerical list.
         Args:
             self.data (list): list of numerical values
@@ -32,6 +33,38 @@ class GraphVisualizer:
             all_rows.append(temp_row)
                     
         return all_rows
+    
+
+    def __add_legend(self, string_data: list[str]):
+        """Add column (value) and row (steps) to string data representing graph.
+        
+        Args:
+            string_data (list[str]): list of strings representing column graph
+
+        Returns:
+            list[str]: list of strings with legend (columns = value / row = steps)
+        """
+
+        # columns - values
+
+        row_labels = [n + 1 for n in range(len(string_data))]
+
+        for position, row in enumerate(string_data):
+            string_data[position] = str(row_labels.pop()).rjust(2) + ' |' + row
+
+        # rows - steps
+
+        steps = (len(string_data[0]) - 4) // 3 # number of steps is lenght of one row minus 4 (legend for values) diveded by 3 (number of characters to show column)
+
+        _1st_lowest_row = f'   -{3 * steps * '-'}'
+        _2nd_lowest_row = '    '
+        for number in range(1, steps + 1):
+            _2nd_lowest_row += str(number).rjust(3)
+        string_data.append(_1st_lowest_row)
+        string_data.append(_2nd_lowest_row)
+
+        return string_data
+        
 
 
     def draw_column_graph(self):
@@ -57,6 +90,8 @@ class GraphVisualizer:
                 
             string_all_rows.append(temp_string_row)
 
+        string_all_rows = self.__add_legend(string_all_rows)
+        
         for row_to_print in string_all_rows:
             print(row_to_print)
 
