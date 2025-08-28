@@ -5,12 +5,15 @@ GitHub: https://github.com/ArseneLuko
 
 class GraphVisualizer:
     char = 'X'
+    reserved_characters = ('|')
 
     def __init__(self, data: list, char: str = None):
         self.data = data
         self.matrix = self.__create_matrix()
         if char is None:
             self.char = GraphVisualizer.char
+        elif char in GraphVisualizer.reserved_characters:
+            self.char = GraphVisualizer.char # TODO: změnit, aby vyhodilo chybu nebo hlášku
         else:
             self.char = char
 
@@ -65,7 +68,6 @@ class GraphVisualizer:
 
         return string_data
         
-
 
     def draw_column_graph(self):
         """The method takes a matrix representing a column graph and displays it on the screen. Columns are drawn using 3 characters, of which first two are spaces.
