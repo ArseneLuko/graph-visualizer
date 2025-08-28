@@ -3,7 +3,6 @@ Author: Lukáš Karásek / lukas@lukaskarasek.cz
 GitHub: https://github.com/ArseneLuko
 """
 
-
 class GraphVisualizer:
     char = 'X'
 
