@@ -15,6 +15,12 @@ class GraphVisualizer:
             self.char = char
 
     def __create_matrix__(self):
+        """Create a matrix presenting columns with 1 (column) or 0 (empty) based on numerical list.
+        Args:
+            self.data (list): list of numerical values
+        Returns:
+            list: List of lists represinting columns
+        """
         all_rows = []
         for row in range(max(self.data), 0, -1):
             temp_row = []
@@ -29,7 +35,13 @@ class GraphVisualizer:
 
 
     def draw_column_graph(self):
+        """The method takes a matrix representing a column graph and displays it on the screen. Columns are drawn using 3 characters, of which first two are spaces.
 
+        Args:
+            self.metrix (list[list]): matrix data contains list of rows with 1 (column) or 0 (empty space)
+            self.char (str): the character used to represent the graph, must have lenght of 1
+        Returns:
+            None: print results directly on the screen."""
         print(f'znak pro vykreslení: {self.char}') # testing line: DELETE
 
         string_all_rows = []
@@ -48,20 +60,3 @@ class GraphVisualizer:
         for row_to_print in string_all_rows:
             print(row_to_print)
 
-
-# testing line
-# all lines below    
-
-testovaci_objekt_bez_znaku = GraphVisualizer([1, 3, 1, 2])
-testovaci_objekt_se_znakem = GraphVisualizer([2, 4, 1], 'i')
-print(f'data testovacího objektu BEZ znaku:{testovaci_objekt_bez_znaku.data}')
-print(f'data testovacího objektu SE znakem:{testovaci_objekt_se_znakem.data}')
-print('*')
-print('volám metodu \'.draw_column_graph\' 1(BEZ), 2(S)')
-testovaci_objekt_bez_znaku.draw_column_graph()
-testovaci_objekt_se_znakem.draw_column_graph()
-print('*')
-print('matrix data pro všechny objekty 1(BEZ), 2(S)')
-print(testovaci_objekt_bez_znaku.matrix)
-print(testovaci_objekt_se_znakem.matrix)
-pass
